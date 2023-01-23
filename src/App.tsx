@@ -33,7 +33,7 @@ function App() {
   async function dataGetter(){
     try{
       // const result = await axios.get('http://api.openweathermap.org/data/2.5/weather?id=524901&appid=c2654c8c929b4d3d3e6acc7b1029754c');
-      const result = await axios.get('http://api.openweathermap.org/data/2.5/forecast?q=New York&appid=c2654c8c929b4d3d3e6acc7b1029754c')
+      const result = await axios.get('http://api.openweathermap.org/data/2.5/forecast?q=Jerusalem&appid=c2654c8c929b4d3d3e6acc7b1029754c')
       console.log(JSON.stringify(result.data["list"]))
       //to reach city data, we have to do result.data["city"]
       return result.data
@@ -87,7 +87,7 @@ function App() {
   }
 
   let convertedTemperature: number = 0
-  if(weather?.currentTemperature != undefined){
+  if(weather?.currentTemperature !== undefined){
     convertedTemperature = Math.trunc(weather.currentTemperature - 273.15)
   }
 

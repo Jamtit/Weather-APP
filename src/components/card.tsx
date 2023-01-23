@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import {Box} from '@mui/material';
-import { parse } from "path";
+
 
 interface futureWeatherInfo{
   time: string,
