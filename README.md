@@ -48,9 +48,8 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## TODO
 
-`1.` Put some icons around the data to make it more informative - Almost done ** Have to make the icons change depending on the weather received **
-`2.` Make sure all types of weathers have background image - Not done
-`3.` Create a button and interface for the user to input their wanted city/town - Not done
-`4.` Connect the button with our API, so that the data of that city/town will be received and shown - Not done
-`5.` Create a click event - when clicked the box should grow bigger in height and should display how the temperature feels, others shouldn't display this data - Not done
-`6.` Create a custom scroll bar - arrows that would scroll the cards either to right or left accordingly
+`1.` Make sure all types of weathers have background image - Kinda
+`2.` Create a button and interface for the user to input their wanted city/town - Not done
+`3.` Connect the button with our API, so that the data of that city/town will be received and shown - Not done
+`4.` Add dates to the cards
+

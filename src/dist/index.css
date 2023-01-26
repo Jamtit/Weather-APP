@@ -29,6 +29,20 @@ body {
   margin-bottom: 10px;
   font-size: 32px;
 }
+.day_weather__feels {
+  opacity: 0;
+}
 .day_weather__time, .day_weather__feels {
   font-size: 16px;
+}
+
+.day_weather:hover {
+  cursor: pointer;
+  scale: 105%;
+  transition-timing-function: ease-in-out;
+  transition-duration: 150ms;
+}
+
+.day_weather:hover .day_weather__feels {
+  opacity: 1;
 }/*# sourceMappingURL=index.css.map */

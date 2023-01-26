@@ -35,7 +35,23 @@ body{
     font-size: 32px;
   }
 
+  &__feels{
+    opacity: 0;
+  }
+
   &__time, &__feels{
     font-size: 16px;
   }
+}
+
+.day_weather:hover{
+  cursor: pointer;
+  scale: 105%;
+  transition-timing-function: ease-in-out;
+  transition-duration: 150ms;
+
+}
+
+.day_weather:hover .day_weather__feels{
+  opacity: 1;
 }
