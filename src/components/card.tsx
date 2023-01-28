@@ -5,7 +5,9 @@ import {Box} from '@mui/material';
 interface futureWeatherInfo{
   time: string,
   temperature: number,
-  feelsLikeTemperature: number
+  feelsLikeTemperature: number,
+  day: string,
+  weather: string
 }
 
 const KandCDifference: number = 273.15
@@ -32,9 +34,11 @@ function cardComp(props: futureWeatherInfo){
 
   return(
     <Box className="day_weather">
+      <h3 className="day_weather__time">{props.day}</h3>
       <h3 className="day_weather__time">{convertedTime} {noonOrMidnight}</h3>
       <h3 className="day_weather__temp">{Math.trunc(props.temperature - KandCDifference)} &deg;C</h3>
       <h3 className="day_weather__feels">Feels like {Math.trunc(props.feelsLikeTemperature - KandCDifference)} &deg;C</h3>
+      <h3 className="day_weather__description">{props.weather}</h3>
     </Box>
   )
 }

@@ -17,6 +17,7 @@ import UmbrellaIcon from '@mui/icons-material/Umbrella';
 import CardComp from './components/card';
 import { faWindowRestore } from '@fortawesome/free-regular-svg-icons';
 
+
 function App() {
 
   interface weatherInfo {
@@ -32,29 +33,42 @@ function App() {
   interface mainStyles{
     backgroundImage: string,
   }
-
+  
   const [weather, setWeather]= React.useState<weatherInfo>()
   const [futureWeather, setFutureWeather] = React.useState([])
   const [city, setCity] = React.useState("Berlin")
-  const [updatedCity, setUpdatedCity] = React.useState("")
 
-
-
-  async function dataGetter(){
-    try{
-      // const result = await axios.get('http://api.openweathermap.org/data/2.5/weather?id=524901&appid=c2654c8c929b4d3d3e6acc7b1029754c');
-      const result = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=Bucharest&appid=c2654c8c929b4d3d3e6acc7b1029754c`)
-      console.log(JSON.stringify(result.data["list"]))
-      //to reach city data, we have to do result.data["city"]
-      return result.data
-    }catch(err){
-      console.error(err)
-    }
+  const getWeatherData = async () =>{
+    const response = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=c2654c8c929b4d3d3e6acc7b1029754c`)
+  
+    const result = response.data;
+  
+    return result
   }
+
+
+  const onClickFetchData = async () =>{
+    const testData = await getWeatherData();
+    const neededInfo: weatherInfo = {
+      city: testData["city"]["name"],
+      currentTemperature: testData["list"][0]["main"]["temp"],
+      weather: testData["list"][0]["weather"][0]["main"],
+      weatherDesc: testData["list"][0]["weather"][0]["description"],
+      humidty: testData["list"][0]["main"]["humidity"],
+      airPressure: testData["list"][0]["main"]["pressure"],
+      windSpeed: testData["list"][0]["wind"]["speed"]
+    }
+    setWeather(neededInfo)
+    setFutureWeather(testData["list"])
+
+    console.log(weather)
+    console.log(futureWeather)
+  }
+
 
   useEffect(()=>{
     (async () =>{
-      const testData = await dataGetter();
+      const testData = await getWeatherData();
       const neededInfo: weatherInfo = {
         city: testData["city"]["name"],
         currentTemperature: testData["list"][0]["main"]["temp"],
@@ -66,7 +80,7 @@ function App() {
       }
       setWeather(neededInfo)
       setFutureWeather(testData["list"])
-
+  
     })();
   }, []);
 
@@ -78,6 +92,8 @@ function App() {
       time = {timeString.slice(10,13)}
       temperature = {items["main"]["temp"]}
       feelsLikeTemperature = {items["main"]["feels_like"]}
+      day = {timeString.slice(5, 10)}
+      weather = {items["weather"][0]["description"]}
     />
   })
 
@@ -97,9 +113,6 @@ function App() {
     setCity(value)
   }
 
-  function refreshCity(){
-    setUpdatedCity(city)
-  }
 
   const appStyle: mainStyles = {
     backgroundImage: 'url(sunny.png)'
@@ -286,7 +299,9 @@ function App() {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <PlaceIcon />
+                    <PlaceIcon sx={{
+                      color: 'white'
+                    }}/>
                   </InputAdornment>
                   
                  ),
@@ -296,9 +311,10 @@ function App() {
                       opacity: '50%',
                       ":hover":{
                         cursor: 'pointer',
-                        opacity: '100%'
-                      }
-                    }} onClick={refreshCity}/>
+                        opacity: '100%',
+                      },
+                      color: 'white'
+                    }} onClick={onClickFetchData}/>
                   </InputAdornment>
                  )
               }}
@@ -307,6 +323,9 @@ function App() {
                 position: 'relative',
                 left: '20px',
                 '& .MuiInputBase-root': {
+                  color: 'white'
+                },
+                ":focused": {
                   color: 'white'
                 }
               }}
@@ -318,7 +337,7 @@ function App() {
           <Box sx={{
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
           }}>
             <ArrowBackIosNewIcon sx={{
               marginInline: '5px',
@@ -335,7 +354,7 @@ function App() {
               overflowX: 'scroll',
               overflowY: 'hidden',
               scrollBehavior: 'smooth',
-              scrollbarWidth: 'none',
+              scrollbarWidth: 'none'
             }}>
               {info}
             </Box>
