@@ -46,10 +46,3 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 
-## TODO
-
-`1.` Make sure all types of weathers have background image - Kinda
-`2.` Create a button and interface for the user to input their wanted city/town - Not done
-`3.` Connect the button with our API, so that the data of that city/town will be received and shown - Not done
-`4.` Add dates to the cards
-
